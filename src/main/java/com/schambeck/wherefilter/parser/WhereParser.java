@@ -4,14 +4,6 @@ import org.parboiled.BaseParser;
 import org.parboiled.Rule;
 import org.parboiled.annotations.BuildParseTree;
 
-/**
- * Expression ← Term ((‘and’ / ‘or’) Term)*
- * Term ← Identifier Operator Value / ‘(’ Expression ‘)’
- * Identifier ← [a-z]+
- * Operator ← '=' '!='
- * Value ← Literal
- * Literal ← ''' [a-z] ''' / [0-9]
- */
 @BuildParseTree
 public class WhereParser extends BaseParser<Object> implements Visitable {
 
