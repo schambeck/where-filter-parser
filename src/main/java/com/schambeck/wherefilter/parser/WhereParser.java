@@ -121,10 +121,6 @@ public class WhereParser extends BaseParser<Object> implements Visitable {
         );
     }
 
-//    Rule String() {
-//        return Sequence("'", ZeroOrMore(ANY), "'");
-//    }
-
     Rule String() {
         return FirstOf(STRING_LITERAL_LONG1(), STRING_LITERAL1(),
                 STRING_LITERAL_LONG2(), STRING_LITERAL2());
