@@ -13,7 +13,7 @@ import org.parboiled.annotations.BuildParseTree;
  * Literal ← ''' [a-z] ''' / [0-9]
  */
 @BuildParseTree
-public class WhereParser extends BaseParser<Object> implements Visitable { // TODO: 27/11/17 Generic em vez de Object
+public class WhereParser extends BaseParser<Object> implements Visitable {
 
     public Rule Expression() {
         return Term();
@@ -67,8 +67,6 @@ public class WhereParser extends BaseParser<Object> implements Visitable { // TO
         );
     }
 
-    // TODO: 26/11/17 implementar precedência de parênteses ()
-    // TODO: 26/11/17 implementar operador not !
     Rule LogicalOperator() {
         return FirstOf(
                 IgnoreCase("and "),
@@ -102,7 +100,6 @@ public class WhereParser extends BaseParser<Object> implements Visitable { // TO
     }
 
     Rule Operator() {
-        // colocar primeiro os operadores com mais caracteres
         return FirstOf(">= ", "<= ", "!= ", "= ", "> ", "< ");
     }
 
@@ -204,9 +201,6 @@ public class WhereParser extends BaseParser<Object> implements Visitable { // TO
         return ZeroOrMore(AnyOf(" \t\f"));
     }
 
-    // we redefine the rule creation for string literals to automatically match trailing whitespace if the string
-    // literal ends with a space character, this way we don't have to insert extra whitespace() rules after each
-    // character or string literal
     @Override
     protected Rule fromStringLiteral(String string) {
         return string.endsWith(" ") ?
